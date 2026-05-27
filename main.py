@@ -1,4 +1,5 @@
 from fastapi import FastAPI #importa FastAPI pra criar a API 
+from fastapi.responses import HTMLResponse 
 import psycopg2 # conexão com o banco de dados online
 
 
@@ -32,11 +33,44 @@ VALUES ('Quem é o líder do BTS?','Namjoonie')""") #adiciona uma linha de pergu
 
 
 
-@app.get("/") # página inicial, me leva à função inicio
+# página inicial, me leva à função inicio
 
-def inicio(): #retorna a letra de Holligan na página inicial
-    introducao = "hahahahahahahahahahahaha HOlligan"
-    return introducao
+@app.get("/", response_class=HTMLResponse)
+
+#retorna a letra de Holligan na página inicial
+def inicio():
+
+    return """
+    <html>
+        <head>
+            <title>Meu Servidor</title>
+        </head>
+
+        <body style="
+            background-color: violet;
+            color: white;
+            font-family: Arial;
+            text-align: center;
+            padding-top: 100px;
+        ">
+
+            <h1>🌌 SdL </h1>
+            <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXlKjV9LJbM2rKMZJ7hXSmgsQstVCOZilswP0fz_pozi-2J1A7v_Li7-pkc6TDfspJ9rtlF3wvuzqo0FPawekAgTem_G36_HKOAijt8A&s=10"
+                width="800"
+
+            </p>
+
+            </p>
+
+            <a href="/usuarios">
+                Ver usuários
+            </a>
+
+        </body>
+    </html>
+    """
+
 
 @app.get("/usuarios") # me leva para a pagina de usuarios (definida pela funcao usuarios)
 
