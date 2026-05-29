@@ -25,7 +25,8 @@ CREATE TABLE IF NOT EXISTS dados(
             id SERIAL PRIMARY KEY,
             tema TEXT,
             pergunta TEXT,
-            resposta TEXT
+            resposta TEXT,
+            fonte TEXT
             )
 """) #cria uma tabela de usuários com SQL 
 
