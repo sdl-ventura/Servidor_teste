@@ -102,15 +102,14 @@ def Banco_de_dados_SdL_IA(): #retorna a lista de usuários
 
     linhas = ""
     # deixando a tabela bonita... 
-    for info in dados:
-        linhas += f """
+    for info in dados
+        linhas += f"""
         <tr>
             <td>{info[0]}</td>
             <td>{info[1]}</td>
             <td>{info[2]}</td>
         </tr>
-        """
-            
+        """       
 
 
     return f"""
