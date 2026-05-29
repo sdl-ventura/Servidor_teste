@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS dados(
             )
 """) #cria uma tabela de usuários com SQL 
 
+cursor.execute("DELETE FROM dados")
 
 with open("dados.csv", newline="", encoding="utf-8") as arquivo:
 
@@ -38,8 +39,10 @@ with open("dados.csv", newline="", encoding="utf-8") as arquivo:
 
     for linha in leitor:
 
-        pergunta = linha[0]
-        resposta = linha[1]
+        tema = linha[1]
+        pergunta = linha[2]
+        resposta = linha[3]
+        fonte = linha[4]
 
 
         cursor.execute(
