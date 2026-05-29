@@ -87,6 +87,8 @@ def inicio():
 
             </p>
 
+            <h5> fonte: LINE Friends
+
             </p>
 
             <a href="/Banco_de_dados_SdL_IA">
