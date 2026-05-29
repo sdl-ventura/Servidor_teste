@@ -14,7 +14,7 @@ cursor = conexao.cursor() #envia comandos SQL (linguagem do banco de dados)
 
 
 cursor.execute("""
-CREATE TABLE IF NOT EXISTS usuarios(
+CREATE TABLE IF NOT EXISTS dados(
             id SERIAL PRIMARY KEY,
             pergunta TEXT,
             resposta TEXT
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS usuarios(
 
 
 cursor.execute("""
-INSERT INTO usuarios (pergunta, resposta)
+INSERT INTO dados (pergunta, resposta)
 VALUES ('Quem é o líder do BTS?','Namjoonie')""") #adiciona uma linha de pergunta e resposta
 
 
@@ -63,8 +63,8 @@ def inicio():
 
             </p>
 
-            <a href="/usuarios">
-                Ver usuários
+            <a href="/Banco_de_dados_SdL_AI">
+                Ver Banco de Dados
             </a>
 
         </body>
@@ -72,10 +72,10 @@ def inicio():
     """
 
 
-@app.get("/usuarios") # me leva para a pagina de usuarios (definida pela funcao usuarios)
+@app.get("/Banco_de_dados_SdL_AI") # me leva para a pagina de usuarios (definida pela funcao usuarios)
 
-def usuarios(): #retorna a lista de usuários
-    cursor.execute("SELECT * FROM usuarios") #devolve todos os usuários
+def Banco_de_dados_SdL_AI(): #retorna a lista de usuários
+    cursor.execute("SELECT * FROM dados") #devolve todos os usuários
 
     dados = cursor.fetchall()
 
