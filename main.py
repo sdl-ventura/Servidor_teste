@@ -135,7 +135,7 @@ def Banco_de_dados_SdL_IA(): #retorna a lista de usuários
 
             table{{
                 width: 80%;
-                margin = auto;
+                margin: auto;
                 border-collapse: collapse;
                 background-color: #1a1a1a;
             }}
@@ -147,17 +147,17 @@ def Banco_de_dados_SdL_IA(): #retorna a lista de usuários
             }}
 
             th {{
-                background-color: lilac;
+                background-color: #c8a2c8;
                 color: white;
             }}
 
-            th:hover {{
+            tr:hover {{
                 background-color: #333333;
             }}
 
             a {{
                 color: purple;
-                texto-decoration: none;
+                text-decoration: none;
             }}
 
             </style>
