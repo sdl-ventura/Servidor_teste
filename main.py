@@ -2,11 +2,17 @@ from fastapi import FastAPI #importa FastAPI pra criar a API
 from fastapi.responses import HTMLResponse 
 import psycopg2 # conexão com o banco de dados online
 import csv #biblioteca para ler a planilha de arquivos
+import os
+from dotenv import load_dotenv
 
+
+load_dotenv() #carrega meu acesso ao neon/fastApi
 
 app = FastAPI() #cria a API
 
-conexao = psycopg2.connect("postgresql://neondb_owner:npg_Np2OZbvC7EmA@ep-divine-wildflower-actmdwf8-pooler.sa-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require")
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+conexao = psycopg2.connect(DATABASE_URL)
 # cria a conexão com o meu projeto do Neon (conexao com SQL, https, etc etc etc)
 
 cursor = conexao.cursor() #envia comandos SQL (linguagem do banco de dados)
