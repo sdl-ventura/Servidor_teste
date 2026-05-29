@@ -108,6 +108,9 @@ def Banco_de_dados_SdL_IA(): #retorna a lista de usuários
             <td>{info[0]}</td>
             <td>{info[1]}</td>
             <td>{info[2]}</td>
+            <td>{info[2]}</td>
+            <td>{info[3]}</td>
+            <td>{info[4]}</td>
         </tr>
         """       
 
