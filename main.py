@@ -48,8 +48,8 @@ with open("dados.csv", newline="", encoding="utf-8") as arquivo:
 
         cursor.execute(
             """
-            INSERT INTO dados (pergunta, resposta)
-            VALUES (%s, %s)
+            INSERT INTO dados (tema, pergunta, resposta, fonte)
+            VALUES (%s, %s, %s, %s)
             """,
             (tema, pergunta, resposta, fonte)
         )
