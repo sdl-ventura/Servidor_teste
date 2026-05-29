@@ -41,12 +41,13 @@ with open("dados.csv", newline="", encoding="utf-8") as arquivo:
         pergunta = linha[0]
         resposta = linha[1]
 
+
         cursor.execute(
             """
             INSERT INTO dados (pergunta, resposta)
             VALUES (%s, %s)
             """,
-            (pergunta, resposta)
+            (tema, pergunta, resposta, fonte)
         )
 
 conexao.commit()
@@ -107,7 +108,6 @@ def Banco_de_dados_SdL_IA(): #retorna a lista de usuários
         <tr>
             <td>{info[0]}</td>
             <td>{info[1]}</td>
-            <td>{info[2]}</td>
             <td>{info[2]}</td>
             <td>{info[3]}</td>
             <td>{info[4]}</td>
