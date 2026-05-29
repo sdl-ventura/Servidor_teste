@@ -1,6 +1,7 @@
 from fastapi import FastAPI #importa FastAPI pra criar a API 
 from fastapi.responses import HTMLResponse 
 import psycopg2 # conexão com o banco de dados online
+import csv #biblioteca para ler a planilha de arquivos
 
 
 app = FastAPI() #cria a API
@@ -16,19 +17,33 @@ cursor = conexao.cursor() #envia comandos SQL (linguagem do banco de dados)
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS dados(
             id SERIAL PRIMARY KEY,
+            tema TEXT
             pergunta TEXT,
             resposta TEXT
             )
 """) #cria uma tabela de usuários com SQL 
 
 
-cursor.execute("""
-INSERT INTO dados (pergunta, resposta)
-VALUES ('Quem é o líder do BTS?','Namjoonie')""") #adiciona uma linha de pergunta e resposta
+with open("dados.csv", newline="", encoding="utf-8") as arquivo:
 
+    leitor = csv.reader(arquivo)
 
+    next(leitor)
 
+    for linha in leitor:
 
+        pergunta = linha[0]
+        resposta = linha[1]
+
+        cursor.execute(
+            """
+            INSERT INTO dados (pergunta, resposta)
+            VALUES (%s, %s)
+            """,
+            (pergunta, resposta)
+        )
+
+conexao.commit()
 
 
 
