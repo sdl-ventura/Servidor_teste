@@ -136,7 +136,7 @@ def Banco_de_dados_SdL_IA(): #retorna a lista de usuários
             }}
             h1 {{
                 text-align: center;
-                color: black;
+                color: white;
             }}
 
             table{{
