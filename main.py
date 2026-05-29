@@ -18,7 +18,7 @@ conexao = psycopg2.connect(DATABASE_URL)
 cursor = conexao.cursor() #envia comandos SQL (linguagem do banco de dados)
 
 
-
+cursor.execute("DROP TABLE IF EXISTS dados")
 
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS dados(
