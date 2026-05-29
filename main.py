@@ -17,7 +17,7 @@ cursor = conexao.cursor() #envia comandos SQL (linguagem do banco de dados)
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS dados(
             id SERIAL PRIMARY KEY,
-            tema TEXT
+            tema TEXT,
             pergunta TEXT,
             resposta TEXT
             )
