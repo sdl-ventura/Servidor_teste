@@ -84,7 +84,7 @@ def inicio():
 
             </p>
 
-            <a href="/Banco_de_dados_SdL_AI">
+            <a href="/Banco_de_dados_SdL_IA">
                 Ver Banco de Dados
             </a>
 
@@ -93,11 +93,98 @@ def inicio():
     """
 
 
-@app.get("/Banco_de_dados_SdL_AI") # me leva para a pagina de usuarios (definida pela funcao usuarios)
+@app.get("/Banco_de_dados_SdL_IA") # me leva para a pagina de usuarios (definida pela funcao usuarios)
 
-def Banco_de_dados_SdL_AI(): #retorna a lista de usuários
+def Banco_de_dados_SdL_IA(): #retorna a lista de usuários
     cursor.execute("SELECT * FROM dados") #devolve todos os usuários
 
     dados = cursor.fetchall()
 
-    return dados
+    linhas = ""
+    # deixando a tabela bonita... 
+    for info in dados:
+        linhas += f """"
+        <tr>
+            <td>{info[0]}</td>
+            <td>{info[1]}</td>
+            <td>{info[2]}</td>
+        </tr>
+        """
+            
+
+
+    return f"""
+    <html>
+        <head>
+            <title> Q&A Mecânica Quântica para treinar IA</title>
+
+            <style>
+
+            body {{
+                background-color: #0f0f0f;
+                color: white;
+                font-family: Arial;
+                padding: 40px
+            }}
+            h1 {{
+                text-align: center;
+                color: black;
+            }}
+
+            table{{
+                width: 80%;
+                margin = auto;
+                border-collapse: collapse;
+                background-color: #1a1a1a;
+            }}
+
+            th, td {{
+                border: 1px solid purple;
+                padding: 12px;
+                text-align: center;
+            }}
+
+            th {{
+                background-color: lilac;
+                color: white;
+            }}
+
+            th:hover {{
+                background-color: #333333;
+            }}
+
+            a {{
+                color: purple;
+                texto-decoration: none;
+            }}
+
+            </style>
+
+        </head>
+
+        <body>
+            <h1> Dados para alimentar IA SdL</h1>
+
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Tema</th>
+                    <th>Pergunta</th>
+                    <th>Resposta</th>
+                    <th>Fonte (se diferente dos livros citados)</th>
+                </tr>
+
+                {linhas}
+            </table>
+
+            <br><br>
+
+
+            <div style="text-align:center;">
+                <a href="/">Voltar</a>
+            </div>
+
+        </body>
+
+    </html>
+    """ 
