@@ -8,70 +8,62 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = FastAPI()
-
-# função responsável por inicializar o banco
-def init_db():
-
-    #conexao com SQL local
-    conexao = psycopg2.connect(
-        host='localhost',
-        database=os.getenv('DATABASE_NAME'),
-        user=os.getenv('DATABASE_USER'),
-        password=os.getenv('DATABASE_PASSWORD')
-    )
-    return conexao
+import os
 
 
-'''
-    cursor.execute("DROP TABLE IF EXISTS dados")
+#conexao com SQL local
+conexao = psycopg2.connect(
+    host='localhost',
+    database=os.getenv('DATABASE_NAME'),
+    user=os.getenv('DATABASE_USER'),
+    password=os.getenv('DATABASE_PASSWORD')
+)
 
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS dados(
-                id SERIAL PRIMARY KEY,
-                tema TEXT,
-                pergunta TEXT,
-                resposta TEXT,
-                fonte TEXT
-                )
-    """) #cria uma tabela de usuários com SQL 
-
-    cursor.execute("DELETE FROM dados")
-
-    with open("dados.csv", newline="", encoding="utf-8") as arquivo:
-
-        leitor = csv.reader(arquivo)
-
-        next(leitor)
-
-        for linha in leitor:
-
-            tema = linha[1]
-            pergunta = linha[2]
-            resposta = linha[3]
-            fonte = linha[4]
+cursor = conexao.cursor() #envia comandos SQL (linguagem do banco de dados)
 
 
-            cursor.execute(
-                """
-                INSERT INTO dados (tema, pergunta, resposta, fonte)
-                VALUES (%s, %s, %s, %s)
-                """,
-                (tema, pergunta, resposta, fonte)
+cursor.execute("DROP TABLE IF EXISTS dados")
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS dados(
+            id SERIAL PRIMARY KEY,
+            tema TEXT,
+            pergunta TEXT,
+            resposta TEXT,
+            fonte TEXT
             )
+""") #cria uma tabela de usuários com SQL 
 
-    conexao.commit()
+cursor.execute("DELETE FROM dados")
 
-    cursor.close()
-    conexao.close()
+with open("dados.csv", newline="", encoding="utf-8") as arquivo:
 
-'''
-# roda a inicialização do banco quando o servidor sobe
-@app.on_event("startup")
-def startup():
-    init_db()
+    leitor = csv.reader(arquivo)
+
+    next(leitor)
+
+    for linha in leitor:
+
+        tema = linha[1]
+        pergunta = linha[2]
+        resposta = linha[3]
+        fonte = linha[4]
+
+
+        cursor.execute(
+            """
+            INSERT INTO dados (tema, pergunta, resposta, fonte)
+            VALUES (%s, %s, %s, %s)
+            """,
+            (tema, pergunta, resposta, fonte)
+        )
+
+conexao.commit()
+
 
 
 # página inicial, me leva à função inicio
+
 @app.get("/", response_class=HTMLResponse)
 
 #retorna a letra de Holligan na página inicial
@@ -102,7 +94,7 @@ def inicio():
 
             </p>
 
-            <a href="/Banco_de_dados">
+            <a href="/Banco_de_dados_SdL_IA">
                 Ver Banco de Dados
             </a>
 
@@ -111,20 +103,12 @@ def inicio():
     """
 
 
-@app.get("/Banco_de_dados", response_class=HTMLResponse)
+@app.get("/Banco_de_dados_SdL_IA", response_class=HTMLResponse) # me leva para a pagina de usuarios (definida pela funcao usuarios)
 
 def Banco_de_dados_SdL_IA(): #retorna a lista de usuários
-
-    #conexao local para leitura (evita conflito com conexão global)
-    conexao = init_db()
-    cursor  = conexao.cursor()
-
     cursor.execute("SELECT * FROM dados") #devolve todos os usuários
 
     dados = cursor.fetchall()
-
-    cursor.close()
-    conexao.close()
 
     linhas = ""
     # deixando a tabela bonita... 
@@ -138,6 +122,7 @@ def Banco_de_dados_SdL_IA(): #retorna a lista de usuários
             <td>{info[4]}</td>
         </tr>
         """       
+
 
     return f"""
     <html>
@@ -214,3 +199,5 @@ def Banco_de_dados_SdL_IA(): #retorna a lista de usuários
 
     </html>
     """ 
+cursor.close()
+conexao.close()
