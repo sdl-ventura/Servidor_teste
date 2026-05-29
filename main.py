@@ -100,7 +100,7 @@ def inicio():
     """
 
 
-@app.get("/Banco_de_dados_SdL_IA") # me leva para a pagina de usuarios (definida pela funcao usuarios)
+@app.get("/Banco_de_dados_SdL_IA", response_class=HTMLResponse) # me leva para a pagina de usuarios (definida pela funcao usuarios)
 
 def Banco_de_dados_SdL_IA(): #retorna a lista de usuários
     cursor.execute("SELECT * FROM dados") #devolve todos os usuários
