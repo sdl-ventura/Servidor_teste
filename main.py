@@ -46,7 +46,7 @@ def inicio():
 
             <h1>🌌 SdL </h1>
             <img
-                src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeXRqYW1maGU5YXVleW8zOGl3ejI3bzkwZWhxaDRxZ2hqdjZsNWQzMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/O0VBge9U7f8j21UqNj/giphy.gif"
+                src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2FkMHp6ODBkcGozMHM4OWp4Zmhib2lwdHh5cmdvNDIwajV6YjMzbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RBbcXmt0syqw10MBQy/giphy.gif"
                 width="800"
 
             </p>
