@@ -14,57 +14,10 @@ def init_db():
 
     #conexao com SQL local
     conexao = psycopg2.connect(
-        host='localhost',
-        database=os.getenv('DATABASE_NAME'),
-        user=os.getenv('DATABASE_USER'),
-        password=os.getenv('DATABASE_PASSWORD')
-    )
+        os.getenv("DATABASE_URL"))
+    
     return conexao
 
-
-'''
-    cursor.execute("DROP TABLE IF EXISTS dados")
-
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS dados(
-                id SERIAL PRIMARY KEY,
-                tema TEXT,
-                pergunta TEXT,
-                resposta TEXT,
-                fonte TEXT
-                )
-    """) #cria uma tabela de usuários com SQL 
-
-    cursor.execute("DELETE FROM dados")
-
-    with open("dados.csv", newline="", encoding="utf-8") as arquivo:
-
-        leitor = csv.reader(arquivo)
-
-        next(leitor)
-
-        for linha in leitor:
-
-            tema = linha[1]
-            pergunta = linha[2]
-            resposta = linha[3]
-            fonte = linha[4]
-
-
-            cursor.execute(
-                """
-                INSERT INTO dados (tema, pergunta, resposta, fonte)
-                VALUES (%s, %s, %s, %s)
-                """,
-                (tema, pergunta, resposta, fonte)
-            )
-
-    conexao.commit()
-
-    cursor.close()
-    conexao.close()
-
-'''
 # roda a inicialização do banco quando o servidor sobe
 @app.on_event("startup")
 def startup():
